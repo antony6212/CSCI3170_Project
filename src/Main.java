@@ -517,25 +517,19 @@ public class Main {
     }
 
     static void readFile(){
-        Connection conn = null;
-        Statement stmt = null;
 
         while(true){
             try {
-                // Connect to the database
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database_name", "your_username", "your_password");
-
                 // Create a statement
-                stmt = conn.createStatement();
+                Statement stmt = conn.createStatement();
                 
                 //Get the path of file
                 Scanner inputScanner = new Scanner(System.in);
-                System.out.println("Enter your file path name(press Enter 2 to exit): [XXXXX.txt]");
+                System.out.println("Enter your file path name(Empty to exit): [XXXXX.txt]");
                 String filePath = inputScanner.nextLine();
-                inputScanner.close();
+                
 
-                if(filePath == "2"){
+                if(filePath.equals("")){
                     break;
                 }
 
@@ -610,18 +604,6 @@ public class Main {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                // Close the statement and connection
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                    if (conn != null) {
-                        conn.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
